@@ -47,6 +47,7 @@
 >
 	<!-- History Controls -->
 	<button
+		type="button"
 		onclick={undo}
 		disabled={!canUndo}
 		class="cursor-pointer rounded p-2 hover:bg-slate-200 disabled:text-slate-400 disabled:hover:bg-transparent dark:hover:bg-slate-600"
@@ -69,6 +70,7 @@
 		</svg>
 	</button>
 	<button
+		type="button"
 		onclick={redo}
 		disabled={!canRedo}
 		class="cursor-pointer rounded p-2 hover:bg-slate-200 disabled:text-slate-400 disabled:hover:bg-transparent dark:hover:bg-slate-600"
@@ -95,6 +97,7 @@
 
 	<!-- Text Formatting -->
 	<button
+		type="button"
 		onclick={formatBold}
 		class={`cursor-pointer rounded p-2 hover:bg-slate-200 dark:hover:bg-slate-600 ${isBold ? 'bg-slate-200 dark:bg-slate-600' : ''}`}
 		aria-label="Format Bold"
@@ -116,6 +119,7 @@
 		</svg>
 	</button>
 	<button
+		type="button"
 		onclick={formatItalic}
 		class={`cursor-pointer rounded p-2 hover:bg-slate-200 dark:hover:bg-slate-600 ${isItalic ? 'bg-slate-200 dark:bg-slate-600' : ''}`}
 		aria-label="Format Italic"
@@ -138,6 +142,7 @@
 		</svg>
 	</button>
 	<button
+		type="button"
 		onclick={formatUnderline}
 		class={`cursor-pointer rounded p-2 hover:bg-slate-200 dark:hover:bg-slate-600 ${isUnderline ? 'bg-slate-200 dark:bg-slate-600' : ''}`}
 		aria-label="Format Underline"
@@ -159,6 +164,7 @@
 		</svg>
 	</button>
 	<button
+		type="button"
 		onclick={formatStrikethrough}
 		class={`cursor-pointer rounded p-2 hover:bg-slate-200 dark:hover:bg-slate-600 ${isStrikethrough ? 'bg-slate-200 dark:bg-slate-600' : ''}`}
 		aria-label="Format Strikethrough"
