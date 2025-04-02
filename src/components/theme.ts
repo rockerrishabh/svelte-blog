@@ -1,0 +1,70 @@
+export const Theme = {
+	ltr: 'ltr',
+	rtl: 'rtl',
+	paragraph: 'text-base leading-relaxed mb-4',
+	quote: 'border-l-4 pl-4 italic text-gray-600',
+	heading: {
+		h1: 'text-3xl font-bold my-4',
+		h2: 'text-2xl font-bold my-3',
+		h3: 'text-xl font-semibold my-2',
+		h4: 'text-lg font-semibold my-2',
+		h5: 'text-base font-medium my-2',
+		h6: 'text-sm font-medium my-1'
+	},
+	list: {
+		nested: {
+			listitem: 'ml-4 mb-1'
+		},
+		ol: 'list-decimal ml-5',
+		ul: 'list-disc ml-5',
+		listitem: 'mb-1',
+		listitemChecked: 'line-through text-green-600',
+		listitemUnchecked: 'text-red-600'
+	},
+	hashtag: 'text-blue-500',
+	image: 'my-4',
+	link: 'text-blue-500 underline hover:text-blue-700',
+	text: {
+		bold: 'font-bold',
+		code: 'font-mono bg-gray-100 p-1 rounded',
+		italic: 'italic',
+		strikethrough: 'line-through',
+		subscript: 'align-baseline text-xs',
+		superscript: 'align-top text-xs',
+		underline: 'underline',
+		underlineStrikethrough: 'underline line-through'
+	},
+	code: 'bg-gray-800 text-white p-2 rounded font-mono',
+	codeHighlight: {
+		atrule: 'text-purple-500',
+		attr: 'text-purple-500',
+		boolean: 'text-orange-500',
+		builtin: 'text-green-500',
+		cdata: 'text-gray-500',
+		char: 'text-green-500',
+		class: 'text-blue-500',
+		'class-name': 'text-blue-500',
+		comment: 'text-gray-400 italic',
+		constant: 'text-orange-500',
+		deleted: 'line-through text-red-500',
+		doctype: 'text-gray-500',
+		entity: 'text-red-500',
+		function: 'text-blue-500',
+		important: 'text-red-600 font-bold',
+		inserted: 'text-green-500',
+		keyword: 'text-purple-500',
+		namespace: 'text-gray-500',
+		number: 'text-orange-500',
+		operator: 'text-purple-500',
+		prolog: 'text-gray-400',
+		property: 'text-orange-500',
+		punctuation: 'text-gray-700',
+		regex: 'text-green-500',
+		selector: 'text-blue-500',
+		string: 'text-green-500',
+		symbol: 'text-orange-500',
+		tag: 'text-red-500',
+		url: 'text-blue-500',
+		variable: 'text-red-500'
+	}
+};
