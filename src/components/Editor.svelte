@@ -13,6 +13,7 @@
 	} from 'lexical';
 	import { Theme } from './theme';
 	import EditorToolbar from './EditorToolbar.svelte';
+	import { onMount } from 'svelte';
 
 	// Reactive states for formatting buttons
 	let isBold = $state(false);
@@ -50,7 +51,7 @@
 	}
 
 	// Initialize Lexical on mount
-	$effect(() => {
+	onMount(() => {
 		if (editorRef) {
 			editor.setRootElement(editorRef);
 
