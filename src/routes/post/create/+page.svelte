@@ -6,4 +6,5 @@
 
 <main class="mx-auto max-w-2xl p-8">
 	<Editor />
+	<pre>{form?.success}</pre>
 </main>
