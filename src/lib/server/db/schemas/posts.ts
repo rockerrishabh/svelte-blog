@@ -18,6 +18,9 @@ export const posts = pgTable('posts', {
 		.$defaultFn(() => new Date()),
 	updatedAt: timestamp('updatedAt', { mode: 'date' })
 });
+
+export type Post = typeof posts.$inferSelect;
+
 export const postsRelations = relations(posts, ({ one, many }) => ({
 	author: one(users, {
 		fields: [posts.authorId],
