@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms';
-	import LabelInput from '../../components/LabelInput.svelte';
-	import Label from '../../components/Label.svelte';
 	import type { PageProps } from './$types';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { page } from '$app/state';
-	import Input from '../../components/Input.svelte';
 	import { SignInSchema } from './schema';
 	import BottomGradient from '../../components/Card/BottomGradient.svelte';
+	import LabelInput from '../../components/ui/LabelInput.svelte';
+	import Label from '../../components/ui/Label.svelte';
+	import Input from '../../components/ui/Input.svelte';
 
 	let { data }: PageProps = $props();
 
