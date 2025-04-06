@@ -8,6 +8,24 @@
 </svelte:head>
 
 <main class="mx-auto max-w-7xl">
+	<div class="flex flex-1">
+		<div
+			class="flex h-full w-full flex-1 flex-col gap-2 rounded-tl-2xl border border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900"
+		>
+			<div class="flex gap-2">
+				{#each Array(4) as _, idx}
+					<div class="h-20 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"></div>
+				{/each}
+				))}
+			</div>
+			<div class="flex flex-1 gap-2">
+				{#each Array(2) as _, idx}
+					<div class="h-full w-full animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"></div>
+				{/each}
+				))}
+			</div>
+		</div>
+	</div>
 	<h1 class="my-6 text-center text-4xl font-bold">Dashboard</h1>
 	{#if data.user}
 		<div class="my-6">

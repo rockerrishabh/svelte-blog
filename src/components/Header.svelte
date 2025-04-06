@@ -33,7 +33,9 @@
 	});
 </script>
 
-<header class="bg-slate-50 px-4 py-3 text-slate-950 shadow-md dark:bg-slate-950 dark:text-slate-50">
+<header
+	class="sticky top-0 bg-slate-50 px-4 py-3 text-slate-950 shadow-md dark:bg-slate-950 dark:text-slate-50"
+>
 	<div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
 		<a href="/" class="rounded text-xl font-bold hover:scale-105" aria-label="Home">
 			Blog <span class="text-sky-700 dark:text-sky-300">App</span>

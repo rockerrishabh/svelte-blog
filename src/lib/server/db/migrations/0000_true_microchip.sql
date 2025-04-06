@@ -2,7 +2,6 @@ CREATE TYPE "public"."provider" AS ENUM('Github', 'Google', 'Credentials');--> s
 CREATE TYPE "public"."role" AS ENUM('Admin', 'Author', 'User');--> statement-breakpoint
 CREATE TABLE "accounts" (
 	"id" text PRIMARY KEY NOT NULL,
-	"provider" "provider" DEFAULT 'Credentials' NOT NULL,
 	"user_id" text,
 	"createdAt" timestamp NOT NULL,
 	"updatedAt" timestamp
@@ -27,6 +26,15 @@ CREATE TABLE "posts" (
 	CONSTRAINT "posts_title_unique" UNIQUE("title")
 );
 --> statement-breakpoint
+CREATE TABLE "providers" (
+	"id" text PRIMARY KEY NOT NULL,
+	"provider" "provider" DEFAULT 'Credentials' NOT NULL,
+	"provider_id" text,
+	"account_id" text,
+	"createdAt" timestamp NOT NULL,
+	"updatedAt" timestamp
+);
+--> statement-breakpoint
 CREATE TABLE "users" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
@@ -36,6 +44,9 @@ CREATE TABLE "users" (
 	"role" "role" DEFAULT 'User' NOT NULL,
 	"salt" text,
 	"hashedPassword" text,
+	"age" integer,
+	"country" text,
+	"bio" text,
 	"createdAt" timestamp NOT NULL,
 	"updatedAt" timestamp,
 	CONSTRAINT "users_email_unique" UNIQUE("email")

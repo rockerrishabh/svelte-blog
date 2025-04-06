@@ -48,6 +48,9 @@ export const updateUser = async ({
 	name?: string;
 	image?: string;
 	emailVerified?: Date;
+	age?: number;
+	country?: string;
+	bio?: string;
 }) => {
 	const updatedUser = await db
 		.update(users)

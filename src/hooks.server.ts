@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import { getSession, getUserBySession } from '$lib/server/utils/authCore'; // Adjust path as needed
 import type { User } from '$lib/server/db/schemas/users';
 
-export type ShortUser = Pick<User, 'name' | 'email' | 'image'>;
+export type ShortUser = Pick<User, 'name' | 'email' | 'image' | 'age' | 'country' | 'bio'>;
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const sessionCookie = event.cookies.get('session');

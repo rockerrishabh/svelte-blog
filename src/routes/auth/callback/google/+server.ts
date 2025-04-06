@@ -1,8 +1,9 @@
 import { redirect } from '@sveltejs/kit';
 import crypto from 'crypto';
 import { GOOGLE_ID, GOOGLE_SECRET, APP_ENDPOINT } from '$env/static/private';
-import { createAccount, createSession, rateLimit } from '../../../../lib/server/utils/authCore';
+import { createAccount, createSession } from '../../../../lib/server/utils/authCore';
 import { createUser, findUserByEmail, updateUser } from '../../../../lib/server/utils/user';
+import { redis } from '$lib/server/db';
 
 type GoogleUser = {
 	id: string;
@@ -17,7 +18,18 @@ type GoogleUser = {
 export const GET = async (event) => {
 	// Rate limiting: check the number of recent login attempts from the IP address.
 	const ip = event.getClientAddress();
-	await rateLimit({ ip });
+	// Rate limiting: check the number of recent login attempts from the IP address.
+	const rateKey = `login_attempts:${ip}`;
+	const attempts = Number(await redis.get(rateKey)) || 0;
+	const MAX_ATTEMPTS = 5;
+	const RATE_LIMIT_WINDOW = 60; // in seconds
+
+	if (attempts >= MAX_ATTEMPTS) {
+		return redirect(303, '/');
+	}
+	// Increment the attempt count and set expiration if it's the first attempt.
+	await redis.incr(rateKey);
+	await redis.expire(rateKey, RATE_LIMIT_WINDOW);
 
 	const code = event.url.searchParams.get('code');
 	if (!code) throw redirect(303, '/');
@@ -62,14 +74,15 @@ export const GET = async (event) => {
 		}
 
 		const newAccount = await createAccount({
+			userId: newUser.id,
 			provider: 'Google',
-			providerId: user.id,
-			userId: newUser.id
+			providerId: user.id
 		});
 
 		if (!newAccount) {
 			throw redirect(303, '/');
 		}
+
 		await createSession({ sessionId, id: newUser.id, role: newUser?.role });
 		event.cookies.set('session', sessionId, {
 			path: '/',

@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { timestamp, pgTable, text, pgEnum } from 'drizzle-orm/pg-core';
+import { timestamp, pgTable, text, pgEnum, integer } from 'drizzle-orm/pg-core';
 import { accounts } from './accounts';
 import { posts } from './posts';
 
@@ -17,6 +17,9 @@ export const users = pgTable('users', {
 	role: roleEnum('role').notNull().default('User'),
 	salt: text('salt'),
 	hashedPassword: text('hashedPassword'),
+	age: integer('age'),
+	country: text('country'),
+	bio: text('bio'),
 	createdAt: timestamp('createdAt', { mode: 'date' })
 		.notNull()
 		.$defaultFn(() => new Date()),

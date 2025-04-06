@@ -1,6 +1,6 @@
 {
-  "id": "eda3cbae-e7a9-4fed-9a98-2faa2b5c946c",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "351c916c-0d18-4204-b000-332eb9bbf75f",
+  "prevId": "eda3cbae-e7a9-4fed-9a98-2faa2b5c946c",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -13,6 +13,14 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "provider",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Credentials'"
         },
         "user_id": {
           "name": "user_id",
@@ -144,57 +152,6 @@
           ]
         }
       },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.providers": {
-      "name": "providers",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "provider": {
-          "name": "provider",
-          "type": "provider",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'Credentials'"
-        },
-        "provider_id": {
-          "name": "provider_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "account_id": {
-          "name": "account_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

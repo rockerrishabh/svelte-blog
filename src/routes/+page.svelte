@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Posts from '../components/Posts.svelte';
+	import Post from '../components/PostCard.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -11,4 +11,6 @@
 	<title>Blog App</title>
 </svelte:head>
 
-<Posts posts={data.posts} />
+<main class="mx-auto max-w-7xl">
+	<Post posts={data.posts} />
+</main>

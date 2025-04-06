@@ -1,5 +1,3 @@
-import { message, type SuperValidated } from 'sveltekit-superforms';
-import { redirect } from '@sveltejs/kit';
 import { eq, type Placeholder, type SQL } from 'drizzle-orm';
 import { z } from 'zod';
 import crypto from 'crypto';
@@ -14,41 +12,6 @@ const sessionSchema = z.object({
 
 export type SessionSchema = z.infer<typeof sessionSchema>;
 
-type Form = SuperValidated<
-	{
-		name?: string;
-		email: string;
-		password: string;
-		confirmPassword?: string;
-	},
-	string,
-	{
-		name?: string;
-		email: string;
-		password: string;
-		confirmPassword?: string;
-	}
->;
-
-export const rateLimit = async ({ ip, form }: { ip: string; form?: Form }) => {
-	// Rate limiting: check the number of recent login attempts from the IP address.
-	const rateKey = `login_attempts:${ip}`;
-	const attempts = Number(await redis.get(rateKey)) || 0;
-	const MAX_ATTEMPTS = 5;
-	const RATE_LIMIT_WINDOW = 60; // in seconds
-
-	if (attempts >= MAX_ATTEMPTS) {
-		if (form) {
-			return message(form, 'Too many login attempts. Please try again later.', { status: 429 });
-		} else {
-			return redirect(303, '/');
-		}
-	}
-	// Increment the attempt count and set expiration if it's the first attempt.
-	await redis.incr(rateKey);
-	await redis.expire(rateKey, RATE_LIMIT_WINDOW);
-};
-
 export const hashPassword = ({ password, salt }: { password: string; salt: string }): string => {
 	const hashedPassword = crypto
 		.pbkdf2Sync(password.normalize(), salt, 1000, 64, 'sha512')
@@ -61,13 +24,11 @@ export const hashPassword = ({ password, salt }: { password: string; salt: strin
 export const verifyPassword = ({
 	plainPassword,
 	userSalt,
-	userPassword,
-	form
+	userPassword
 }: {
 	plainPassword: string;
 	userSalt: string;
 	userPassword: string;
-	form: Form;
 }) => {
 	const hashedPassword = crypto
 		.pbkdf2Sync(plainPassword.normalize(), userSalt, 1000, 64, `sha512`)
@@ -78,12 +39,10 @@ export const verifyPassword = ({
 	const hashBuffer = Buffer.from(hashedPassword, 'hex');
 	const storedBuffer = Buffer.from(userPassword, 'hex');
 
-	if (
-		hashBuffer.length !== storedBuffer.length ||
-		!crypto.timingSafeEqual(hashBuffer, storedBuffer)
-	) {
-		return message(form, 'Invalid credentials', { status: 400 });
-	}
+	return {
+		isValid:
+			hashBuffer.length === storedBuffer.length && crypto.timingSafeEqual(hashBuffer, storedBuffer)
+	};
 };
 
 export const createSession = async ({
@@ -95,7 +54,7 @@ export const createSession = async ({
 	id: string;
 	role: string;
 }) => {
-	await redis.set(
+	return await redis.set(
 		`session:${sessionId}`,
 		{ id, role },
 		{
@@ -105,25 +64,25 @@ export const createSession = async ({
 };
 
 export const createAccount = async ({
-	provider,
 	providerId,
-	userId
+	userId,
+	provider
 }: {
-	provider:
+	providerId?: string;
+	userId: string;
+	provider?:
 		| SQL<unknown>
 		| 'Github'
 		| 'Google'
 		| 'Credentials'
 		| Placeholder<string, unknown>
 		| undefined;
-	providerId: string;
-	userId: string;
 }) => {
 	const [newAccount] = await db
 		.insert(accounts)
 		.values({
-			provider,
 			id: providerId,
+			provider,
 			userId
 		})
 		.returning();
@@ -159,6 +118,9 @@ export const getUserBySession = async ({ sessionData }: { sessionData: SessionSc
 	return {
 		name: user.name,
 		email: user.email,
-		image: user.image
+		image: user.image,
+		age: user.age,
+		country: user.country,
+		bio: user.bio
 	};
 };
