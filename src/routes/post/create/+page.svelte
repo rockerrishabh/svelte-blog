@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Editor from '../../../components/Editor.svelte';
+	import Editor from '../../../components/Editor/Editor.svelte';
 	import type { PageProps } from './$types';
 	let { form }: PageProps = $props();
 </script>
