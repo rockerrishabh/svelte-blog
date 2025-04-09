@@ -1,0 +1,7 @@
+{
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": ".cloudflare/public",
+		"binding": "ASSETS"
+	}
+}

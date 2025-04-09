@@ -1,4 +1,0 @@
-assets.directory = ".cloudflare/public"
-assets.binding = "ASSETS"
-compatibility_flags = ["nodejs_compat"]
-compatibility_date = "2025-04-09"
