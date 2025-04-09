@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import { getSession, getUserBySession } from '$lib/server/utils/authCore'; // Adjust path as needed
 import type { User } from '$lib/server/db/schemas/users';
 

@@ -1,7 +1,7 @@
 import { zod, type Infer } from 'sveltekit-superforms/adapters';
 import { superValidate } from 'sveltekit-superforms';
 import { message } from 'sveltekit-superforms/server';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { SignUpSchema } from './schema';

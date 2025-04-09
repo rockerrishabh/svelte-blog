@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import { GOOGLE_ID, GOOGLE_SECRET, APP_ENDPOINT } from '$env/static/private';
 import { createAccount, createSession } from '../../../../lib/server/utils/authCore';
 import { createUser, findUserByEmail, updateUser } from '../../../../lib/server/utils/user';

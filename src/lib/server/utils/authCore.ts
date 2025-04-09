@@ -1,6 +1,6 @@
 import { eq, type Placeholder, type SQL } from 'drizzle-orm';
 import { z } from 'zod';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import { db, redis } from '$lib/server/db';
 import { accounts } from '$lib/server/db/schemas/accounts';
 import { users } from '$lib/server/db/schemas/users';
